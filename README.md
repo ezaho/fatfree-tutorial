@@ -56,7 +56,7 @@ Allez voir dans localhost; normalement vous devriez voir s'afficher "hello world
 
 ## pour aller plus loin:
 
-Ajouter dans votrerépertoire-projet les dossiers 'app' et 'assets' qui eux vont contenir chacun des sous-dossiers.
+Ajouter dans votre répertoire-projet les dossiers 'app' et 'assets' qui eux vont contenir chacun des sous-dossiers.
 
 Et la structure de votre projet ressemble à ceci:
 
@@ -76,4 +76,39 @@ Et la structure de votre projet ressemble à ceci:
               |_ .htaccess
               |_ index.php
               |_ readme 
+les variables globales set et get :
 
+       $f3->set('name','value') :c'est la paire clé-valeur.
+       $f3->get() :pour obtenir la valeur de la clé 'name'.
+       exemple:
+              <?php
+                 $f3=require('lib/base.php');
+                 $f3->set('message','voici ton livre');
+                 $f3->route('GET /',
+                                function($f3){
+                                         echo $f3 get('message');
+                                         }
+                                   );
+                 $f3->run()
+                  ?>
+
+Routing basé par classe
+
+Cette section est super importante. C'est le point où vous pouvez passer de la programmation par fonction à la POO . Sans le routing basé sur la classe, nous ne serions pas en mesure de créer le projet MVC que vous verrez dans ce tutoriel.
+
+On va changer la fonction de routing en classe de routing :
+
+c'est à dire le 2ème argument dans $f3->route( , ) est à changer.
+
+                 <?php
+                 $f3=require('lib/base.php');
+                 class Main {
+                          function render (){
+                                    echo"voici ton livre";
+                                     }
+                                }
+                  $f3->route('GET /','Main->render');
+                  $f3->run()
+               ?>
+
+Qu' avons nous fait ?Nous avons créé une classe appelée Main et dedans nous avons créé une methode appelée render .Et le 2ème argument de [$f3->route] à changer devient :'Main->render' .
