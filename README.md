@@ -1,5 +1,5 @@
 # fatfree-tutorial
-Fatfree est un framework pour php
+Fatfree est un framework pour php.
 
 Commencez par télécharger fat free à partir du site officiel:
 
@@ -54,7 +54,7 @@ Ajoutez : echo"hello world!" dans la fonction :
 
 Allez voir dans localhost; normalement vous devriez voir s'afficher "hello world!".
 
-## pour aller plus loin:
+### pour aller plus loin:
 
 Ajouter dans votre répertoire-projet les dossiers 'app' et 'assets' qui eux vont contenir chacun des sous-dossiers.
 
@@ -76,7 +76,7 @@ Et la structure de votre projet ressemble à ceci:
               |_ .htaccess
               |_ index.php
               |_ readme 
-les variables globales set et get :
+### les variables globales set et get :
 
        $f3->set('name','value') :c'est la paire clé-valeur.
        $f3->get() :pour obtenir la valeur de la clé 'name'.
@@ -92,7 +92,7 @@ les variables globales set et get :
                  $f3->run()
                   ?>
 
-Routing basé par classe
+### Routing basé par classe
 
 Cette section est super importante. C'est le point où vous pouvez passer de la programmation par fonction à la POO . Sans le routing basé sur la classe, nous ne serions pas en mesure de créer le projet MVC que vous verrez dans ce tutoriel.
 
