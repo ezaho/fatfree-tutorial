@@ -112,3 +112,62 @@ c'est à dire le 2ème argument dans $f3->route( , ) est à changer.
                ?>
 
 Qu' avons nous fait ?Nous avons créé une classe appelée Main et dedans nous avons créé une methode appelée render .Et le 2ème argument de [$f3->route] à changer devient :'Main->render' .
+ 
+### Les méthodes 'beforeroute' et 'afterroute' :
+
+Si vous ajoutez ces deux méthodes à votre classe ,fatfree les appellera automatiquement avant et après chaque appel de routing;il suffit de les utiliser tels quels :'beforeroute' et 'afterroute'.
+
+Ecrivez ce code et voyez dans localhost ce que ça donne:
+
+               <?php
+                      $f3=require ('lib/base.php');
+                      $f3->set('DEBUG',3);
+                      class Main {   
+                              function beforeroute (){
+                                    echo"avant routing";
+                                     }
+                              function afterroute (){
+                                    echo"après routing";
+                                     }
+                             function render (){
+                                    echo"voici ton livre";
+
+                                     }
+                                }
+                  $f3->route('GET /','Main->render');
+                  $f3->run();
+               ?>
+
+### Avançons vers la création d'un projet MVC
+
+Avec cet exemple de code que nous allons détailler après :
+
+               <?php
+                    $f3=require ('lib/base.php');
+                    $f3->set('DEBUG',3);
+                    class Appcontroller{   
+                              function beforeroute (){
+                                    echo"avant routing";
+                                     }
+                              function afterroute (){
+                                    echo"après routing";
+                                     }
+                     class Main extends Appcontroller {
+                                 function render(){
+                                   echo"voici ton livre";
+                                 }
+                     class AboutController extends AppController {
+                                fonction render () {
+                               echo 'Ceci est la page à propos de' ;
+                                       }
+                                      } 
+                  $ f3 -> route ( 'GET /' , 'Main-> render' );
+                  $ f3 -> route ( 'GET / about','AboutController->render');
+                  $ f3 -> run ();
+               ?>
+
+Avec la classe AppController, ce sera la classe parente de tous nos contrôleurs avec les mêmes méthodes beforeroute et afterroute.
+
+Avec (class Main extends Appcontroller) cela signifie que AppController est la classe parente de Main, c'est-à-dire que Main héritera des méthodes et des variables de la classe AppController.
+
+AboutController sera notre controller ,un objet dans notre projet en MVC.
