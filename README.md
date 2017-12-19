@@ -269,7 +269,10 @@ UI indique à f3 où rechercher les vues.C'est là que nous disons à f3 que nos
 AUTOLOAD c'est ici que nous disons à f3 de trouver les classes de contrôleur sous app/controllers/ .
 
 CONTROLLER.php 
-                    <?php class controller{
+
+                    <?php 
+                    
+                     class controller{
                           function beforeroute (){ 
                                 echo"avant routing"; 
                                 } 
