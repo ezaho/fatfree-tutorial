@@ -1,17 +1,17 @@
-# fatfree-tutorial
-Fatfree est un framework pour php.
+# FatFree-tutorial
+FatFree est un framework pour php.
 
-Commencez par télécharger fat free à partir du site officiel:
+Commencez par télécharger FatFree à partir du site officiel:
 
  https://fatfreeframework.com
 
-N'hesitez pas à consulter "user guide" sur ce site.
+N'hesitez pas à consulter "user guide" de fatfree :https://fatfreeframework.com/3.6/user-guide
 
-Assurez-vous que la version de votre php peut supporter fatfree: au-delà de php 5.3
+Assurez-vous que la version de votre php peut supporter FatFree: au-delà de php 5.3
 
-Placez fatfree dans le repertoire où vous comptez l'utiliser.Précisément,mettez dans votre répertoire-projet tout le contenu de fatfree.
+Placez FatFree dans le repertoire où vous comptez l'utiliser.Précisément,mettez dans votre répertoire-projet tout le contenu de fatfree.
 
-Votre fatfree devrait contenir des dossiers et fichiers suivants :
+Votre FatFree devrait contenir des dossiers et fichiers suivants :
 
               |_ lib
               |_ ui 
@@ -23,7 +23,7 @@ Votre fatfree devrait contenir des dossiers et fichiers suivants :
 
 Premier pas : "hello world!"
 
-A chaque utilisation du command : $f3 c' est le framework fatfree qui s'exécute.
+A chaque utilisation du command : $f3 c' est le framework FatFree qui s'exécute.
 
 On veut afficher "hello world !" dans localhost à partir du fichier index.php
 
@@ -115,14 +115,14 @@ Qu' avons nous fait ?Nous avons créé une classe appelée Main et dedans nous a
  
 ### Les méthodes 'beforeroute' et 'afterroute' :
 
-Si vous ajoutez ces deux méthodes à votre classe ,fatfree les appellera automatiquement avant et après chaque appel de routing;il suffit de les utiliser tels quels :'beforeroute' et 'afterroute'.
+Si vous ajoutez ces deux méthodes à votre classe ,fatfree les appellera automatiquement avant et après chaque appel de routing;il suffit de les utiliser telles quelles :'beforeroute' et 'afterroute'.
 
 Ecrivez ce code et voyez dans localhost ce que ça donne:
 
                <?php
                       $f3=require ('lib/base.php');
                       $f3->set('DEBUG',3);
-                      class Main {   
+                      class maincontroller {   
                               function beforeroute (){
                                     echo"avant routing";
                                      }
@@ -134,40 +134,92 @@ Ecrivez ce code et voyez dans localhost ce que ça donne:
 
                                      }
                                 }
-                  $f3->route('GET /','Main->render');
+                  $f3->route('GET /','maincontroller->render');
                   $f3->run();
                ?>
 
 ### Avançons vers la création d'un projet MVC
+
+1-LA STRUCTURE DES DOSSIERS ET FICHIERS:
+
+Comment créer un projet MVC avec FatFree ?
+
+On aura une structure des dossiers et fichiers comme ceci:
+
+                             |_ app
+                                     |_ Model
+                                                   |_
+                                                   |_
+                                                   |_
+                                     |_ View
+                                                  |_template.html
+                                     |_ Controller
+                                                  |_controller.php
+                                                  |_maincontroller
+
+                             |_assets
+                                            |_ CSS
+                                            |_ js
+                                            |_img
+                                            |_fonts
+
+                              |_ lib
+                              |_ ui 
+                              |_ composer.ini
+                              |_ config.ini
+                              |_ .htaccess
+                              |_ index.php
+                              |_ readme
+                              |_route.ini
+
+2-EXPLICATION:
+
+Vous devriez créer les fichiers 'config.ini',route.ini' ,le dossier 'assets',et le dossier 'app' avec ses sous-dossiers 'model',view','controller' sans oublier leurs fichiers qui vont avec.
+
+-'app' pour stocker le code source du projet.
+
+-'index.php' est le fichier principal de notre application web.
+
+-'routes.ini' est le fichier de configuration où nous stockons nos routes. Oui, nous déplaçons nos routes d'index.php à routes.ini .
+
+-'config.ini' est le fichier où nous stockons nos variables config f3.
+
+-'composer.json' est un fichier de configuration du gestionnaire de paquets PHP.
+
+Le dossier 'controller' contient nos fichiers de contrôle,vos classes doivent résider dans un fichier dédié, une classe par fichier, où le nom du fichier et le nom de la classe sont exactement les mêmes.
+
+3-LE CODE :
+
+D'abord le 'C' ,comme controller de MVC, avec cet exemple de code que nous allons détailler après :
 
 Avec cet exemple de code que nous allons détailler après :
 
                <?php
                     $f3=require ('lib/base.php');
                     $f3->set('DEBUG',3);
-                    class Appcontroller{   
+                    class controller{   
                               function beforeroute (){
                                     echo"avant routing";
                                      }
                               function afterroute (){
                                     echo"après routing";
                                      }
-                     class Main extends Appcontroller {
+                     class maincontroller extends controller {
                                  function render(){
                                    echo"voici ton livre";
                                  }
-                     class AboutController extends AppController {
+                     class AboutController extends controller {
                                 fonction render () {
                                echo 'Ceci est la page à propos de' ;
                                        }
                                       } 
-                  $ f3 -> route ( 'GET /' , 'Main-> render' );
+                  $ f3 -> route ( 'GET /' , 'maincontroller-> render' );
                   $ f3 -> route ( 'GET / about','AboutController->render');
                   $ f3 -> run ();
                ?>
 
-Avec la classe AppController, ce sera la classe parente de tous nos contrôleurs avec les mêmes méthodes beforeroute et afterroute.
+Avec la classe controller, ce sera la classe parente de tous nos contrôleurs avec les mêmes méthodes beforeroute et afterroute.
 
-Avec (class Main extends Appcontroller) cela signifie que AppController est la classe parente de Main, c'est-à-dire que Main héritera des méthodes et des variables de la classe AppController.
+Avec (class maincontroller extends controller) cela signifie que controller est la classe parente de maincontroller, c'est-à-dire que maincontroller héritera des méthodes et des variables de la classe controller.
 
 AboutController sera notre controller ,un objet dans notre projet en MVC.
